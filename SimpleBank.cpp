@@ -2,12 +2,13 @@
 using namespace std;
 
 int main() {
-  cout << "Welcome to SimpleBank";
+  cout << "Welcome to SimpleBank." << endl;
 
+  // {{{
   while (true)
   {
     // Print the menu:
-    cout << "[D]eposit: \n":
+    cout << "[D]eposit: \n";
     cout << "[W]ithdraw\n";
     cout << "[A]ccount Balance\n";
     cout << "[C]alculate Interest-payment\n";
@@ -18,12 +19,22 @@ int main() {
 
     if (menuSelection == 'D' || menuSelection == 'd')
     {
-      cout << "\n";
+      cout << "(choice is Deposit)\n";
       // Code goes here
     }
-    else if (menuSelection == 'H' || menuSelection == 'h')
+    else if (menuSelection == 'W' || menuSelection == 'w')
     {
-      cout << "\n";
+      cout << "(choice is Withdraw)\n";
+      // Code goes here
+    }
+    else if (menuSelection == 'A' || menuSelection == 'a')
+    {
+      cout << "(choice is Account Balance)\n";
+      // Code goes here
+    }
+    else if (menuSelection == 'C' || menuSelection == 'c')
+    {
+      cout << "(choice is Calculate Interest-payment)\n";
       // Code goes here
     }
     else if (menuSelection == 'Q' || menuSelection == 'q')
@@ -32,27 +43,45 @@ int main() {
     }
     else
     {
-      cout << "Ogiltigt val!\n";
+      cout << "Unsupported choice! Try again.\n";
     }
   }
+  // }}}
 
-  cout << "Ange nr: ";
-  int nr;
-  cin >> nr;
-  switch (nr)
-  {
-    case 1:
-      cout << "case 1";
-      break;
+  // {{{
+  // // Print menu
+  // cout << "[D]eposit\n";
+  // cout << "[W]ithdraw\n";
+  // cout << "[A]ccount Balance\n";
+  // cout << "[C]alculate Interest-payment\n";
+  // cout << "[Q]uit\n";
+  // 
+  // // enum charchoices { D, d, W, w, A, a, C, c, Q, q };
+  // cout << "Your choice: \n";
+  // char choice;
+  // // int nr;
+  // // cin >> nr;
+  // // switch (nr)
+  // cin >> choice;
+  // switch (choice)
+  // {
+  //   case 'D':
+  //     cout << "Deposit\n";
+  //     break;
 
-    case 2:
-      cout << "case 2";
-      break;
+  //   case 'W':
+  //     cout << "Withdraw";
+  //     break;
 
-    default:
-      cout << "defult case";
-      break;
-  }
+  //  // case Q:
+  //  //   cout << "Withdraw";
+  //  //   break;
+
+  //   default:
+  //     cout << "Unsupported input! Try again.\n";
+  //     break;
+  // }
+  // }}}
 
   // cin.get()
   return 0;
