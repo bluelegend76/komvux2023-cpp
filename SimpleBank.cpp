@@ -1,4 +1,5 @@
 #include <iostream>
+#include <ctype>
 using namespace std;
 
 int main() {
@@ -56,30 +57,37 @@ int main() {
   cout << "[C]alculate Interest-payment\n";
   cout << "[Q]uit\n";
   
-  // enum charchoices { D, d, W, w, A, a, C, c, Q, q };
-  cout << "Your choice: \n";
-  char choice;
-  // int nr;
-  // cin >> nr;
-  // switch (nr)
-  cin >> choice;
-  switch (choice)
-  {
-    case ('D' || 'd'):
-      cout << "Deposit\n";
-      break;
+  while (true) {
+    cout << "Your choice: \n";
+    char choice;
+    cin >> choice;
 
-    case 'W':
-      cout << "Withdraw";
-      break;
+    switch (tolower(choice))
+    {
+      case 'd':
+        cout << "Deposit\n";
+        break;
 
-   // case Q:
-   //   cout << "Withdraw";
-   //   break;
+      case 'w':
+        cout << "Withdraw\n";
+        break;
 
-    default:
-      cout << "Unsupported input! Try again.\n";
-      break;
+      case 'a':
+        cout << "Account Balance\n";
+        break;
+
+      case 'c':
+        cout << "Calculate Interest-payment\n";
+        break;
+
+      case 'q':
+        return 0;
+        break;
+
+      default:
+        cout << "Unsupported input! Try again.\n";
+        break;
+    }
   }
   // }}}
 
