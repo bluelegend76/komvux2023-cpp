@@ -65,7 +65,7 @@ int main() {
   cin >> choice;
   switch (choice)
   {
-    case 'D':
+    case ('D' || 'd'):
       cout << "Deposit\n";
       break;
 
