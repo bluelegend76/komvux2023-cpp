@@ -2,19 +2,24 @@
 #include <ctype.h>
 using namespace std;
 
-int main() {
-  float accountBalance = 0;
-
-  cout << "Welcome to SimpleBank" << endl;
-  cout << "current balance: " << accountBalance << endl;
-
+void PrintMenu() {
   // Print menu
   cout << "-- menu --\n";
   cout << "[D]eposit\n";
   cout << "[W]ithdraw\n";
   cout << "[A]ccount Balance\n";
   cout << "[C]alculate Interest Payment\n";
+  cout << " [R]eprint Menu\n";
   cout << "[Q]uit\n";
+  cout << "----------\n";
+}
+
+int main() {
+  float accountBalance = 0;
+
+  cout << "Welcome to SimpleBank" << endl;
+  cout << "current balance: " << accountBalance << endl;
+  PrintMenu();
 
   while (true) {
     cout << "Your choice: ";
@@ -55,16 +60,24 @@ int main() {
 
       case 'c':
         cout << "Calculate Interest-payment\n";
-        float yearlyDeposit = 0;
-        int yearlyInterestRate = 0;
-        int numOfYears = 0;
+        float yearlyDeposit;
+        int yearlyInterestRate;
+        int numOfYears;
+        cout << "\n";
+        cout << "\n";
+        cout << "\n";
+        cout << "\n";
+        break;
+
+      case 'r':
+        PrintMenu();
         break;
 
       case 'q':
         return 0;
 
       default:
-        cout << "Unsupported input! Try again.\n";
+        cout << "   Unsupported input. Returning to menu.\n";
         break;
     }
   }
@@ -72,3 +85,4 @@ int main() {
   // cin.get()
   return 0;
 }
+
