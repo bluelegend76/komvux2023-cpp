@@ -2,8 +2,8 @@
 #include <ctype.h>
 using namespace std;
 
+// Printing the Main Menu
 void PrintMenu() {
-  // Print menu
   cout << "-- menu --\n";
   cout << "[D]eposit\n";
   cout << "[W]ithdraw\n";
@@ -13,6 +13,10 @@ void PrintMenu() {
   cout << "[Q]uit\n";
   cout << "----------\n";
 }
+
+// float PercentToFraction(intPercent) {
+//   return intPercent / 100;
+// }
 
 int main() {
   float accountBalance = 0;
@@ -59,14 +63,29 @@ int main() {
         break;
 
       case 'c':
-        cout << "Calculate Interest-payment\n";
+        cout << "-- Calculate Interest-payment --\n";
         float yearlyDeposit;
-        int yearlyInterestRate;
+        float yearlyInterestRate;
         int numOfYears;
-        cout << "\n";
-        cout << "\n";
-        cout << "\n";
-        cout << "\n";
+        // float interestPaymentSum;
+
+        cout << "Sum to save (per year): ";
+        cin >> yearlyDeposit;
+
+        cout << "Interest rate (in whole percents): ";
+        cin >> yearlyInterestRate;
+
+        cout << "Number of years (to save during): ";
+        cin >> numOfYears;
+
+        for (int i=1; i <= numOfYears; i++) {
+          accountBalance = (accountBalance + yearlyDeposit)
+            + ((accountBalance + yearlyDeposit) * (yearlyInterestRate / 100));
+          // temp-var to check values
+          cout << i << endl;
+          cout << accountBalance << endl;
+        }
+        cout << "Account balance is now: " << accountBalance << endl;
         break;
 
       case 'r':
@@ -85,4 +104,31 @@ int main() {
   // cin.get()
   return 0;
 }
+
+// Welcome to SimpleBank
+// current balance: 0
+// -- menu --
+// [D]eposit
+// [W]ithdraw
+// [A]ccount Balance
+// [C]alculate Interest Payment
+//  [R]eprint Menu
+// [Q]uit
+// ----------
+// Your choice: d
+// Amount to deposit: 100
+// Your choice: c
+// -- Calculate Interest-payment --
+// TODO: CHECK FIRST TESTRUN
+// Sum to save (per year): 10
+// Interest rate (in whole percents): 2
+// Number of years (to save during): 3
+// 1
+// 112.2
+// 2
+// 124.644
+// 3
+// 137.337
+// Account balance is now: 137.337
+// Your choice: 
 
