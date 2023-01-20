@@ -4,9 +4,6 @@ using namespace std;
 
 int main() {
   float accountBalance = 0;
-  float yearlyDeposit = 0;
-  int yearlyInterestRate = 0;
-  int numOfYears = 0;
 
   cout << "Welcome to SimpleBank" << endl;
   cout << "current balance: " << accountBalance << endl;
@@ -58,6 +55,9 @@ int main() {
 
       case 'c':
         cout << "Calculate Interest-payment\n";
+        float yearlyDeposit = 0;
+        int yearlyInterestRate = 0;
+        int numOfYears = 0;
         break;
 
       case 'q':
