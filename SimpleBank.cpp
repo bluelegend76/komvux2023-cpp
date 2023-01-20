@@ -4,8 +4,6 @@ using namespace std;
 
 int main() {
   float accountBalance = 0;
-  /* float deposit = 0; */
-  float withdrawal = 0;
   float yearlyDeposit = 0;
   int yearlyInterestRate = 0;
   int numOfYears = 0;
@@ -37,12 +35,21 @@ int main() {
           accountBalance += deposit;
         }
         else {
-          cout << "(No negative numbers. Returning to menu)\n";
+          cout << "   No negative numbers. Returning to menu\n";
         }
         break;
 
       case 'w':
         cout << "Sum to withdraw: ";
+        float withdrawal;
+        cin >> withdrawal;
+
+        if (accountBalance - withdrawal > 0) {
+          accountBalance -= withdrawal;
+        }
+        else {
+          cout << "   Withdrawal larger than balance. Returning to menu\n";
+        }
         break;
 
       case 'a':
