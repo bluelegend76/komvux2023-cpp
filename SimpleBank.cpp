@@ -2,6 +2,7 @@
 #include <ctype.h>
 using namespace std;
 
+
 // Printing the Main Menu
 void PrintMenu() {
   cout << "-- menu --\n";
@@ -17,6 +18,7 @@ void PrintMenu() {
 // float PercentToFraction(intPercent) {
 //   return intPercent / 100;
 // }
+
 
 int main() {
   float accountBalance = 0;
@@ -41,7 +43,7 @@ int main() {
           accountBalance += deposit;
         }
         else {
-          cout << "   No negative numbers. Returning to menu\n";
+          cout << "   No negative numbers. Returning to menu.\n";
         }
         break;
 
@@ -54,7 +56,7 @@ int main() {
           accountBalance -= withdrawal;
         }
         else {
-          cout << "   Withdrawal larger than balance. Returning to menu\n";
+          cout << "   Withdrawal larger than balance. Returning to menu.\n";
         }
         break;
 
@@ -78,12 +80,16 @@ int main() {
         cout << "Number of years (to save during): ";
         cin >> numOfYears;
 
+        // TODO Bit unclear in the spec:
+        //  = should result of the calculation be added to balance,
+        //    or just echoed/reported?
         for (int i=1; i <= numOfYears; i++) {
-          accountBalance = (accountBalance + yearlyDeposit)
-            + ((accountBalance + yearlyDeposit) * (yearlyInterestRate / 100));
-          // temp-var to check values
+          accountBalance = (accountBalance + yearlyDeposit) *
+                             (1 + (yearlyInterestRate / 100));
+          // -- temp-vars to check values during run of loop
           cout << i << endl;
           cout << accountBalance << endl;
+          // --
         }
         cout << "Account balance is now: " << accountBalance << endl;
         break;
@@ -105,6 +111,9 @@ int main() {
   return 0;
 }
 
+// == First "0.1" testrun
+// (=mainly checking the 'Calculate Interest-payment' functionality)
+//
 // Welcome to SimpleBank
 // current balance: 0
 // -- menu --
@@ -118,8 +127,8 @@ int main() {
 // Your choice: d
 // Amount to deposit: 100
 // Your choice: c
+//  TODO: CHECK FIRST TESTRUN BELOW
 // -- Calculate Interest-payment --
-// TODO: CHECK FIRST TESTRUN
 // Sum to save (per year): 10
 // Interest rate (in whole percents): 2
 // Number of years (to save during): 3
