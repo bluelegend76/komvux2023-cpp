@@ -1,5 +1,6 @@
 #include <iostream>
 #include <ctype.h>
+#include <limits>
 using namespace std;
 
 
@@ -18,7 +19,13 @@ void PrintMenu() {
 // float PercentToFraction(intPercent) {
 //   return intPercent / 100;
 // }
+//
 
+// TODO: Check what '\n' does (!!)
+void clearCin() {
+  cin.clear();
+  cin.ignore(numeric_limits<streamsize>::max(),'\n');
+}
 
 int main() {
   float accountBalance = 0;
@@ -29,16 +36,34 @@ int main() {
 
   while (true) {
     cout << "Your choice: ";
-    char choice;
+    char choice = 0;
     cin >> choice;
+    if (cin.peek() != '\n') {
+      clearCin();
+      cout << "   Input error. Returning to menu.\n";
+      continue;
+    }
+
+    float deposit = 0;
+    float withdrawal = 0;
+    float yearlyDeposit = 0;
+    float yearlyInterestRate = 0;
+    int numOfYears = 0;
 
     switch (tolower(choice))
     {
       case 'd':
         cout << "Amount to deposit: ";
-        float deposit;
         cin >> deposit;
 
+        if (!cin) {
+          // TODO: Include in cases below
+          //  (+possibly moving 'general error message'
+          //   to incide the clearCin-function)
+          clearCin();
+          cout << "   Input error. Returning to menu.\n";
+          break;
+        }
         if (deposit > 0) {
           accountBalance += deposit;
         }
@@ -49,11 +74,13 @@ int main() {
 
       case 'w':
         cout << "Sum to withdraw: ";
-        float withdrawal;
         cin >> withdrawal;
 
-        if (accountBalance - withdrawal > 0) {
+        if (accountBalance - withdrawal >= 0) {
           accountBalance -= withdrawal;
+        }
+        else if (withdrawal <= 0) {
+          cout << "   No negative numbers. Returning to menu.\n";
         }
         else {
           cout << "   Withdrawal larger than balance. Returning to menu.\n";
@@ -66,15 +93,12 @@ int main() {
 
       case 'c':
         cout << "-- Calculate Interest-payment --\n";
-        float yearlyDeposit;
-        float yearlyInterestRate;
-        int numOfYears;
         // float interestPaymentSum;
 
         cout << "Sum to save (per year): ";
         cin >> yearlyDeposit;
 
-        cout << "Interest rate (in whole percents): ";
+        cout << "Interest rate (in percents): ";
         cin >> yearlyInterestRate;
 
         cout << "Number of years (to save during): ";

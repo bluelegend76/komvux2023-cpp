@@ -3,11 +3,12 @@
 using namespace std;
 
 // = 'amnen'  // (or 'courses')
+// ev. skapa konstant för array-storlek
 const string subjectAreas[5] = {"Math","English","French","History","Physics"};
 int scores[5];   // = 'poang' // (or a vector)
 // int scores[sizeof(subjectAreas) / sizeof(string)];
-// char grades[6]; (??)
 // 0-5 representing the grades A through F
+// char grades[6]; (??)
 int grades[6];  // = 'betyg'
 
 int readScores() {  // = 'LasPoang'
@@ -23,13 +24,13 @@ int readScores() {  // = 'LasPoang'
 
 int "Convert Scores to Grades"() {  // = '' [scoresToGrades]  ((readScores ??)
   for (i=0; i < scores.size(); i++) {
-    for (j=0; j < grades.size(); j++) {
+    for (; i < grades.size(); ) {
       if (scores[i] == 100) {  // If-statement [that converts test-scores to A-F-grades]
-        //   A = 100ps
-        //   B = 90-99ps
-        //   C = 80-89ps
-        //   D = 70-79ps
-        //   E = 60-69ps
+        //   A = 100-90ps
+        //   B = 80-89ps
+        //   C = 70-79ps
+        //   D = 60-69ps
+        //   E = 50-59ps
         //   F = <50ps
         grades[j]++
       }
