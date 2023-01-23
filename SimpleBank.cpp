@@ -48,7 +48,8 @@ int main() {
     float withdrawal = 0;
     float yearlyDeposit = 0;
     float yearlyInterestRate = 0;
-    int numOfYears = 0;
+    int   numOfYears = 0;
+    float interestPaymentSum = 0;
 
     switch (tolower(choice))
     {
@@ -93,7 +94,6 @@ int main() {
 
       case 'c':
         cout << "-- Calculate Interest-payment --\n";
-        // float interestPaymentSum;
 
         cout << "Sum to save (per year): ";
         cin >> yearlyDeposit;
@@ -105,17 +105,27 @@ int main() {
         cin >> numOfYears;
 
         // TODO Bit unclear in the spec:
-        //  = should result of the calculation be added to balance,
-        //    or just echoed/reported?
+        //  = Should result of the calculation
+        //  - be added to balance, or
+        //  - just echoed/reported? [X]
         for (int i=1; i <= numOfYears; i++) {
-          accountBalance = (accountBalance + yearlyDeposit) *
-                             (1 + (yearlyInterestRate / 100));
+          /* accountBalance = (accountBalance + yearlyDeposit) * */
+                             /* (1 + (yearlyInterestRate / 100)); */
+          interestPaymentSum =
+            (accountBalance + yearlyDeposit) * (1 + (yearlyInterestRate / 100));
           // -- temp-vars to check values during run of loop
-          cout << i << endl;
-          cout << accountBalance << endl;
-          // --
+          // cout << i << endl;
+          // cout << accountBalance << endl;
+          // ----
         }
-        cout << "Account balance is now: " << accountBalance << endl;
+        //cout << "Account balance is now: " << accountBalance << endl;
+        cout << "----" << endl;
+        cout << "Report:\n";
+        cout << "Saving for " << numOfYears << " year(s),\n";
+        cout << "with a yearly deposit of " << yearlyDeposit << ",\n";
+        cout << "and at " << yearlyInterestRate << " percent interest,\n";
+        cout << "would (including current balance) yield the sum " << interestPaymentSum << ".\n";
+        cout << "----" << endl;
         break;
 
       case 'r':
