@@ -16,16 +16,18 @@ void PrintMenu() {
   cout << "----------\n";
 }
 
+// {{{
 // float PercentToFraction(intPercent) {
 //   return intPercent / 100;
 // }
-//
+// }}}
 
 // TODO: Check what '\n' does (!!)
-void clearCin() {
+void ClearCin() {
   cin.clear();
   cin.ignore(numeric_limits<streamsize>::max(),'\n');
 }
+
 
 int main() {
   float accountBalance = 0;
@@ -39,7 +41,7 @@ int main() {
     char choice = 0;
     cin >> choice;
     if (cin.peek() != '\n') {
-      clearCin();
+      ClearCin();
       cout << "   Input error. Returning to menu.\n";
       continue;
     }
