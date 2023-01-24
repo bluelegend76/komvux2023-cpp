@@ -1,8 +1,7 @@
 #include <iostream>
 using namespace std;
 
-// Skapa en klass 'stad'
-// som innehåller två attribut.
+// Skapa en klass 'stad' som innehåller två attribut.
 //
 // class Cities (
 //   string name; // 'namn'

@@ -114,10 +114,10 @@ int main() {
         for (int i=1; i <= numOfYears; i++) {
           /* accountBalance = (accountBalance + yearlyDeposit) * */
                              /* (1 + (yearlyInterestRate / 100)); */
-          interestPaymentSum += yearlyDeposit * (1 + (yearlyInterestRate / 100));
+          interestPaymentSum = (interestPaymentSum + yearlyDeposit) * (1 + (yearlyInterestRate / 100));
           // -- temp-vars to check values during run of loop
-          // cout << i << endl;
-          // cout << interestPaymentSum << endl;
+          cout << i << endl;
+          cout << interestPaymentSum << endl;
             // cout << accountBalance << endl;
           // ----
         }
