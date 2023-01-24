@@ -63,7 +63,7 @@ int main() {
           // TODO: Include in cases below
           //  (+possibly moving 'general error message'
           //   to incide the clearCin-function)
-          clearCin();
+          ClearCin();
           cout << "   Input error. Returning to menu.\n";
           break;
         }
@@ -110,14 +110,15 @@ int main() {
         //  = Should result of the calculation
         //  - be added to balance, or
         //  - just echoed/reported? [X]
+        interestPaymentSum = accountBalance;
         for (int i=1; i <= numOfYears; i++) {
           /* accountBalance = (accountBalance + yearlyDeposit) * */
                              /* (1 + (yearlyInterestRate / 100)); */
-          interestPaymentSum =
-            (accountBalance + yearlyDeposit) * (1 + (yearlyInterestRate / 100));
+          interestPaymentSum += yearlyDeposit * (1 + (yearlyInterestRate / 100));
           // -- temp-vars to check values during run of loop
           // cout << i << endl;
-          // cout << accountBalance << endl;
+          // cout << interestPaymentSum << endl;
+            // cout << accountBalance << endl;
           // ----
         }
         //cout << "Account balance is now: " << accountBalance << endl;
