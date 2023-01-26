@@ -35,13 +35,13 @@ int linSearch(City obj[], int n, int key)
   return -1;
 }   
 
-void bubbleSort(City obj[2],int count) {
+void bubbleSort(City obj[3], int count) {
   //             'fält städer'
   for (int i = 0; i < count; i++) {
     // inner =walking through elements
-    int nrleft = count - i;  // counter for checking already passed
+    int nrleft = count - i;  // counter for checking already processed objects
     for (int j = 0; j < nrleft; j++) {
-      if (obj[j].temp > obj[j+1].temp) { // comparing class-attributes
+      if (obj[j].temp > obj[j+1].temp) { // comparing by class-attributes
         // changing place
           // City tmp[1];
         City tmp = obj[j];
@@ -56,15 +56,23 @@ void bubbleSort(City obj[2],int count) {
 int main() {
   // Declare an array w. four cities (+including their temp-measures)
   // = Values to be input by user when the program runs
-  const int asize = 2;
-  City city[asize];
+  const int asize = 3;
+  City cities[asize];
 
   // Get data from user:
   // = name and temp for cities
   //    +Check temp-values (between -60 and +60)
   cout << "--- Enter Cities and Temperatures ---" << endl;
   for (int i = 0; i < asize; i++) {
-    city[i].getdata();
+    cities[i].getdata();
+  }
+
+  // Sort array/vector 'cities' according to temp
+  // (=coldest cities first)
+  // +print names of cities (with temps)
+  bubbleSort(cities, asize);
+  for (int i = 0; i < asize; i++) {
+    cout << cities[i].ToString() << endl;
   }
 
   // Call function/method LinSearch
@@ -73,17 +81,13 @@ int main() {
   cout << "Enter temp-value (=int) to search for: ";
   int key;
   cin >> key;
-  linSearch(city, asize, key);
-
-  // Sort array/vector 'cities' according to temp
-  // (=coldest cities first)
-  // +print names of cities (with temps)
+  linSearch(cities, asize, key);
 
     // simple initial echo-test
-    // cout << city.ToString() << endl;
+    // cout << cities.ToString() << endl;
     // for (int i = 0; i < asize; i++) {
-    //   // city[i].getdata();
-    //   cout << city[i].ToString() << endl;
+    //   // cities[i].getdata();
+    //   cout << cities[i].ToString() << endl;
     // }
 
   cout << "--- Thanks for using WeatherStation! ---" << endl;
