@@ -181,6 +181,21 @@ class City {
 /* } */
 /*   return 0; */
 /* } */
+
+int linSearch(City obj[], int n, int key)
+{
+  for (int i=0; i <= n; i++) {
+    if (obj[i].temp == key) {
+      // return i;         
+      cout << "Result: " << obj[i].name << endl;
+      return 0;
+    }
+  }
+  // return -1;
+  cout << "Result: No city matches temp." << endl;
+  return -1;
+}   
+
 /* // }}} */
 
 // bubble sort {{{
@@ -269,21 +284,23 @@ class City {
 /* int myList[] = {15, 3, 7, 1, 42}; */
 /* int max = 4; */
 /* // Den yttre loopen, går igenom hela listan */
-/* for (int i = 0; i < max; i++) */
-/* { */
-/*   // Den inre, går igenom element för element */
-/*   int nrLeft = max - i;  // För att se hur många som redan gåtts igenom */
-/*   for (int j = 0; j < nrLeft; j++) */
-/*   { */
-/*     if (mylist[j] > mylist[j+1])  // Jämför elementen */
-/*     { */
-/*       // Byt plats! */
-/*       int temp = mylist[j]; */
-/*       myList[j] = mylist[j+1]; */
-/*       myList[j+1] = temp; */
-/*     } */
-/*   } */
-/* } */
+//void bubbleSort(string cities[], int n) {
+void bubbleSort(City obj[n], int count) {
+  //             'fält städer'
+  for (int i = 0; i < count; i++) {
+    // inner =walking through elements
+    int nrleft = count - i;  // counter for checking already passed
+    for (int j = 0; j < nrleft; j++) {
+      if (obj[j].temp > obj[j+1].temp) {  // Jämför elementen
+        // changing place
+        City tmp[1];
+        tmp = obj[j];
+        obj[j] = obj[j+1];
+        obj[j+1] = tmp;
+      }
+    }
+  }
+}
 
 /* // Skriv ut listan: */
 /* for(int i = 0; i < 5; 1++) */
@@ -304,30 +321,37 @@ void City::getdata() {
 int main() {
   // Declare an array w. four cities (+including their temp-measures)
   // = Values to be input by user when the program runs
-  const int n = 4;
-  City city[n];
+  const int asize = 2;
+  City city[asize];
 
   // Get data from user:
   // = name and temp for cities
   //    +Check temp-values (between -60 and +60)
   cout << "--- Enter Cities and Temperatures ---" << endl;
-  for (int i = 0; i < n; i++) {
+  for (int i = 0; i < asize; i++) {
     city[i].getdata();
   }
 
   // Call function/method LinSearch
   // to search for city with certain temp
+  cout << "--- Searching for city with certain temperature ---" << endl;
+  cout << "Enter temp-value (=int) to search for: ";
+  int key;
+  cin >> key;
+  linSearch(city, asize, key);
 
   // Sort array/vector 'cities' according to temp
   // (=coldest cities first)
   // +print names of cities (with temps)
 
-  // cout << city.ToString() << endl;
-  for (int i = 0; i < n; i++) {
-    // city[i].getdata();
-    cout << city[i].ToString() << endl;
-  }
-  cout << "--- Thanks for using WeatherStation ---"
+    // simple initial echo-test
+    // cout << city.ToString() << endl;
+    // for (int i = 0; i < asize; i++) {
+    //   // city[i].getdata();
+    //   cout << city[i].ToString() << endl;
+    // }
+
+  cout << "--- Thanks for using WeatherStation! ---" << endl;
 
   return 0;
 }
