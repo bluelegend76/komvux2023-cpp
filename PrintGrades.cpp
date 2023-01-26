@@ -5,13 +5,13 @@ using namespace std;
 const int cArrsize = 5;
 // (or 'courses') = 'amnen'
 const string subjectAreas[cArrsize] = {"Math","English","French","History","Physics"};
-int scores[cArrsize]; // = 'poang'  (or a vector)
+int scores[cArrsize];  // = 'poang'  (or a vector)
   // int scores[sizeof(subjectAreas) / sizeof(string)];
 const char grades[6] = {'A','B','C','D','E','F'};
 // 0-5 =later to be referenced against grades A through F
 int gradesBySubjects[cArrsize] = {0,0,0,0,0}; // = 'betyg'
 
-void ReadScores() { // = 'LasPoang'
+void ReadScores() {  // = 'LasPoang'
   // TODO: Add checks
   //  - Only numbers as input (+how to handle inside a for-loop(??))
   //  - Only numbers from 0 to 100 allowed
