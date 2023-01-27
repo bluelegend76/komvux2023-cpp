@@ -21,6 +21,8 @@ void City::getdata() {
   cin >> temp;
 };
  
+// "Om key inte finns med i din array
+//  så kommer du att krascha"
 int linSearch(City obj[], int n, int key)
 {
   for (int i=0; i <= n; i++) {
@@ -35,9 +37,14 @@ int linSearch(City obj[], int n, int key)
   return -1;
 }   
 
+// "Finns en bugg i sorten
+//  som kommer göra att den kraschar
+//  i slutet av sin körning"
+//      + "kompileringsfel om
+//         ändrar storlek på arrayen"
 void bubbleSort(City obj[3], int count) {
   //             'fält städer'
-  for (int i = 0; i < count; i++) {
+  for (int i = 1; i < count; i++) {
     // inner =walking through elements
     int nrleft = count - i;  // counter for checking already processed objects
     for (int j = 0; j < nrleft; j++) {
@@ -56,7 +63,7 @@ void bubbleSort(City obj[3], int count) {
 int main() {
   // Declare an array w. four cities (+including their temp-measures)
   // = Values to be input by user when the program runs
-  const int asize = 3;
+  const int asize = 6;
   City cities[asize];
 
   // Get data from user:
@@ -67,10 +74,10 @@ int main() {
     cities[i].getdata();
   }
 
-  // Sort array/vector 'cities' according to temp
-  // (=coldest cities first)
-  // +print names of cities (with temps)
+  // Sorting array 'cities' by temp
+  cout << "--- Sorting Cities by Temperature (coldest first) ---" << endl;
   bubbleSort(cities, asize);
+  // +print sorted city names (with corresponding temps)
   for (int i = 0; i < asize; i++) {
     cout << cities[i].ToString() << endl;
   }
