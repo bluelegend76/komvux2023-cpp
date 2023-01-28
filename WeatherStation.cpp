@@ -26,7 +26,7 @@ void City::getdata() {
 int linSearch(City obj[], int n, int key)
 {
   for (int i=0; i < n; i++) {
-    cout << "Searching, inspecting city: " << obj[i].ToString() << endl;
+    // cout << "Searching, inspecting city: " << obj[i].ToString() << endl;
     if (obj[i].temp == key) {
       return i;         
     }
@@ -39,15 +39,16 @@ int linSearch(City obj[], int n, int key)
 //  i slutet av sin körning"
 //      + "kompileringsfel om
 //         ändrar storlek på arrayen"
-void bubbleSort(City obj[3], int count) {
+void bubbleSort(City obj[], int count) {
   //             'fält städer'
   for (int i = 1; i < count; i++) {
     // inner =walking through elements
     int nrleft = count - i;  // counter for checking already processed objects
     for (int j = 0; j < nrleft; j++) {
-      if (obj[j].temp > obj[j+1].temp) { // comparing by class-attributes
+      // comparing by value in object attribute 'temp'
+      if (obj[j].temp > obj[j+1].temp) {
         // changing place
-          // City tmp[1];
+           // City tmp[1];
         City tmp = obj[j];
         obj[j] = obj[j+1];
         obj[j+1] = tmp;
@@ -60,7 +61,7 @@ void bubbleSort(City obj[3], int count) {
 int main() {
   // Declare an array w. four cities (+including their temp-measures)
   // = Values to be input by user when the program runs
-  const int asize = 3;
+  const int asize = 4;
   City cities[asize];
 
   // Get data from user:
@@ -89,7 +90,7 @@ int main() {
   resultNum = linSearch(cities, asize, key);
 
   if (resultNum == -1) {
-    cout << "Result: No city matches temp." << endl;
+    cout << "Result: No city-temp matches search key." << endl;
   }
   else {
     cout << "Result: " << cities[resultNum].name << " has temp " << key << endl;
