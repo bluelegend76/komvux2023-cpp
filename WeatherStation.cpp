@@ -26,6 +26,7 @@ void City::getdata() {
 int linSearch(City obj[], int n, int key)
 {
   for (int i=0; i <= n; i++) {
+    cout << "Searching, inspecting city: " << obj[i].ToString() << endl;
     if (obj[i].temp == key) {
       // return i;         
       cout << "Result: " << obj[i].name << endl;
