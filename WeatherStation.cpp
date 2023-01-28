@@ -41,12 +41,14 @@ int linSearch(City obj[], int n, int key)
 //         ändrar storlek på arrayen"
 void bubbleSort(City obj[], int count) {
   //             'fält städer'
-  for (int i = 1; i < count; i++) {
+  for (int i = 0; i < count - 1; i++) {
     // inner =walking through elements
-    int nrleft = count - i;  // counter for checking already processed objects
+    int nrleft = count - 1 - i;  // counter for checking already processed objects
     for (int j = 0; j < nrleft; j++) {
       // comparing by value in object attribute 'temp'
       if (obj[j].temp > obj[j+1].temp) {
+        cout << "Sorting, inspecting city: " << obj[j].ToString() << endl;
+        cout << "Sorting, inspecting city: " << obj[i].ToString() << endl;
         // changing place
            // City tmp[1];
         City tmp = obj[j];

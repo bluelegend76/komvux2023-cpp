@@ -61,7 +61,7 @@ int main() {
         if (!cin) {
           // TODO: Include in cases below
           //  (+possibly moving 'general error message'
-          //   to incide the clearCin-function)
+          //   to inside the clearCin-function)
           ClearCin();
           cout << "   Input error. Returning to menu.\n";
           break;
