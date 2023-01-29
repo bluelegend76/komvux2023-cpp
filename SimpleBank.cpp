@@ -10,7 +10,8 @@ void PrintMenu() {
   cout << "[W]ithdraw\n";
   cout << "[A]ccount Balance\n";
   cout << "[C]alculate Interest Payment\n";
-  cout << " [R]eprint Menu\n";
+  cout << "[R]eprint Menu\n";
+  cout << endl;
   cout << "[Q]uit\n";
   cout << "----------\n";
 }
@@ -21,7 +22,7 @@ void PrintMenu() {
 // }
 // }}}
 
-// TODO: Check what '\n' does (!!)
+// Function to clear cin up until the next linebreak
 void ClearCin() {
   cin.clear();
   cin.ignore(numeric_limits<streamsize>::max(),'\n');
@@ -39,6 +40,7 @@ int main() {
     cout << "Your choice: ";
     char choice = 0;
     cin >> choice;
+    // Checking that input to menu is only one character
     if (cin.peek() != '\n') {
       ClearCin();
       cout << "   Input error. Returning to menu.\n";
@@ -57,15 +59,12 @@ int main() {
       case 'd':
         cout << "Amount to deposit: ";
         cin >> deposit;
-
         if (!cin) {
-          // TODO: Include in cases below
-          //  (+possibly moving 'general error message'
-          //   to inside the clearCin-function)
           ClearCin();
           cout << "   Input error. Returning to menu.\n";
           break;
         }
+
         if (deposit > 0) {
           accountBalance += deposit;
         }
@@ -77,12 +76,17 @@ int main() {
       case 'w':
         cout << "Sum to withdraw: ";
         cin >> withdrawal;
-
-        if (accountBalance - withdrawal >= 0) {
-          accountBalance -= withdrawal;
+        if (!cin) {
+          ClearCin();
+          cout << "   Input error. Returning to menu.\n";
+          break;
         }
-        else if (withdrawal <= 0) {
-          cout << "   No negative numbers. Returning to menu.\n";
+
+        if (withdrawal <= 0) {
+          cout << "   Only positive numbers. Returning to menu.\n";
+        }
+        else if (accountBalance - withdrawal >= 0) {
+          accountBalance -= withdrawal;
         }
         else {
           cout << "   Withdrawal larger than balance. Returning to menu.\n";
@@ -98,29 +102,42 @@ int main() {
 
         cout << "Sum to save (per year): ";
         cin >> yearlyDeposit;
+        if (!cin) {
+          ClearCin();
+          cout << "   Input error. Returning to menu.\n";
+          break;
+        }
 
         cout << "Interest rate (in percents): ";
         cin >> yearlyInterestRate;
+        if (!cin) {
+          ClearCin();
+          cout << "   Input error. Returning to menu.\n";
+          break;
+        }
 
         cout << "Number of years (to save during): ";
         cin >> numOfYears;
+        if (!cin) {
+          ClearCin();
+          cout << "   Input error. Returning to menu.\n";
+          break;
+        }
 
-        // TODO Bit unclear in the spec:
-        //  = Should result of the calculation
+        // Bit unclear in the spec:
+        //  Should result of the calculation
         //  - be added to balance, or
-        //  - just echoed/reported? [X]
+        //  - just echoed/reported?
+        //  --
+        // I chose to report result of saving for num of years with interest
+        //  (rather than writing result back to account balance)
         interestPaymentSum = accountBalance;
         for (int i=1; i <= numOfYears; i++) {
           /* accountBalance = (accountBalance + yearlyDeposit) * */
                              /* (1 + (yearlyInterestRate / 100)); */
-          interestPaymentSum = (interestPaymentSum + yearlyDeposit) * (1 + (yearlyInterestRate / 100));
-          // -- temp-vars to check values during run of loop
-          cout << i << endl;
-          cout << interestPaymentSum << endl;
-            // cout << accountBalance << endl;
-          // ----
+          interestPaymentSum = (interestPaymentSum + yearlyDeposit)
+                                 * (1 + (yearlyInterestRate / 100));
         }
-        //cout << "Account balance is now: " << accountBalance << endl;
         cout << "----" << endl;
         cout << "Report:\n";
         cout << "Saving for " << numOfYears << " year(s),\n";
@@ -135,6 +152,7 @@ int main() {
         break;
 
       case 'q':
+        cout << "Thank you for using SimpleBank!\n";
         return 0;
 
       default:
@@ -143,9 +161,9 @@ int main() {
     }
   }
 
-  // cin.get()
   return 0;
 }
+
 
 // == First "0.1" testrun
 // (=mainly checking the 'Calculate Interest-payment' functionality)
@@ -157,7 +175,8 @@ int main() {
 // [W]ithdraw
 // [A]ccount Balance
 // [C]alculate Interest Payment
-//  [R]eprint Menu
+// [R]eprint Menu
+//
 // [Q]uit
 // ----------
 // Your choice: d

@@ -1,6 +1,14 @@
 #include <iostream>
 #include <string>
+#include <limits>
 using namespace std;
+
+// Function to clear cin up until the next linebreak
+void ClearCin() {
+  cin.clear();
+  cin.ignore(numeric_limits<streamsize>::max(),'\n');
+}
+
 
 class City {
   public:
@@ -11,22 +19,34 @@ class City {
       return name + ", " + to_string(temp);
     }
 
-    void getdata();
+    void GetData();
 };
 
-void City::getdata() {
+void City::GetData() {
   cout << "Enter city: ";
   cin >> name;
-  cout << "Enter temperature: ";
-  cin >> temp;
+
+  bool inputOk = false;
+  while (!inputOk) {
+    cout << "Enter temperature: ";
+    cin >> temp;
+    if (!cin) {
+      ClearCin();
+      cout << "Input error. Try again.\n";
+    }
+    else if (temp < -60 || temp > 60) {
+      cout << "Only values from -60 to 60. Try again.\n";
+    }
+    else {
+      inputOk = true;
+    }
+  }
 };
  
-// "Om key inte finns med i din array
-//  så kommer du att krascha"
 int linSearch(City obj[], int n, int key)
 {
   for (int i=0; i < n; i++) {
-    // cout << "Searching, inspecting city: " << obj[i].ToString() << endl;
+    //@ cout << "Searching, inspecting city: " << obj[i].ToString() << endl;
     if (obj[i].temp == key) {
       return i;         
     }
@@ -34,23 +54,23 @@ int linSearch(City obj[], int n, int key)
   return -1;
 }
 
-// "Finns en bugg i sorten
-//  som kommer göra att den kraschar
-//  i slutet av sin körning"
-//      + "kompileringsfel om
-//         ändrar storlek på arrayen"
+// Pseudo code BubbleSort ----
+// FOR i = 0 to Length of list - 1
+//   FOR j = 0 to Length of list - 1 - i
+//     IF list[j] > list[j+1] THEN
+//       Change place of elements list[j] and list[j+1]
+//     END IF
+//   END FOR
+// END FOR
 void bubbleSort(City obj[], int count) {
   //             'fält städer'
   for (int i = 0; i < count - 1; i++) {
-    // inner =walking through elements
+    // inner: walking through elements
     int nrleft = count - 1 - i;  // counter for checking already processed objects
     for (int j = 0; j < nrleft; j++) {
       // comparing by value in object attribute 'temp'
       if (obj[j].temp > obj[j+1].temp) {
-        cout << "Sorting, inspecting city: " << obj[j].ToString() << endl;
-        cout << "Sorting, inspecting city: " << obj[i].ToString() << endl;
         // changing place
-           // City tmp[1];
         City tmp = obj[j];
         obj[j] = obj[j+1];
         obj[j+1] = tmp;
@@ -61,23 +81,21 @@ void bubbleSort(City obj[], int count) {
 
 
 int main() {
-  // Declare an array w. four cities (+including their temp-measures)
-  // = Values to be input by user when the program runs
+  // Declare an array with four cities (+including their temp-measures)
   const int asize = 4;
   City cities[asize];
 
   // Get data from user:
   // = name and temp for cities
-  //    +Check temp-values (between -60 and +60)
   cout << "--- Enter Cities and Temperatures ---" << endl;
   for (int i = 0; i < asize; i++) {
-    cities[i].getdata();
+    cities[i].GetData();
   }
 
   // Sorting array 'cities' by temp
   cout << "--- Sorting Cities by Temperature (coldest first) ---" << endl;
   bubbleSort(cities, asize);
-  // +print sorted city names (with corresponding temps)
+  // print sorted city names (with corresponding temps)
   for (int i = 0; i < asize; i++) {
     cout << cities[i].ToString() << endl;
   }
@@ -97,13 +115,6 @@ int main() {
   else {
     cout << "Result: " << cities[resultNum].name << " has temp " << key << endl;
   }
-
-  // simple initial echo-test
-  // cout << cities.ToString() << endl;
-  // for (int i = 0; i < asize; i++) {
-  //   // cities[i].getdata();
-  //   cout << cities[i].ToString() << endl;
-  // }
 
   cout << "--- Thanks for using WeatherStation! ---" << endl;
   return 0;
