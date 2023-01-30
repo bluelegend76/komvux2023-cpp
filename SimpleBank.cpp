@@ -3,8 +3,17 @@
 #include <limits>
 using namespace std;
 
+// Clear cin (up until the next linebreak)
+void ClearCin() {
+  // resetting cin error flag
+  cin.clear();
+  // skip everything until next newline
+  cin.ignore(numeric_limits<streamsize>::max(),'\n');
+}
+
 // Printing the Main Menu
 void PrintMenu() {
+  // Note: May be a better approach to use 'endl' consistently
   cout << "-- menu --\n";
   cout << "[D]eposit\n";
   cout << "[W]ithdraw\n";
@@ -16,24 +25,12 @@ void PrintMenu() {
   cout << "----------\n";
 }
 
-// {{{
-// float PercentToFraction(intPercent) {
-//   return intPercent / 100;
-// }
-// }}}
-
-// Function to clear cin up until the next linebreak
-void ClearCin() {
-  cin.clear();
-  cin.ignore(numeric_limits<streamsize>::max(),'\n');
-}
-
 
 int main() {
   float accountBalance = 0;
 
   cout << "Welcome to SimpleBank" << endl;
-  cout << "current balance: " << accountBalance << endl;
+  cout << "Current balance: " << accountBalance << endl;
   PrintMenu();
 
   while (true) {
@@ -47,6 +44,7 @@ int main() {
       continue;
     }
 
+    // Declaring variables for use in the switch
     float deposit = 0;
     float withdrawal = 0;
     float yearlyDeposit = 0;
@@ -54,12 +52,48 @@ int main() {
     int   numOfYears = 0;
     float interestPaymentSum = 0;
 
+
+      // Switch pseudo code:
+      // Case of choice
+      //   d    Display "Amount to deposit"
+      //        Read sum to deposit
+      //        IF deposit > 0 THEN
+      //           balance = balance + deposit
+      //        ELSE
+      //          Display "No negative numbers. Returning to menu."
+      //        END IF
+      //   w    Display "Sum to withdraw"
+      //        Read sum to withdraw
+      //        IF sum_to_withdraw <= 0 THEN
+      //           Display "Only positive numbers. Returning to menu"
+      //        ELSE IF balance - sum_to_withdraw >= 0
+      //           balance = balance - sum_to_withdraw
+      //        ELSE
+      //           Display "Withdrawal larger than balance. Returning to menu"
+      //        END IF
+      //   a    Display balance
+      //   c    Display "Calculate interest-payment"
+      //        Read yearly_deposit
+      //        Read interest_rate (percents)
+      //        Read num_of_years
+      //        Write balance to interest_payment_sum
+      //        FOR i = 1 to num_of_years
+      //           interest_payment_sum = (interest_payment_sum + yearly_deposit) * (1 + (interest_rate / 100))
+      //        END FOR
+      //        Display "Result of calculation is: " interest_payment_sum
+      //   r    Re-display menu
+      //   q    Exit program
+      //   Else   Display "Input error. Returning to menu."
+      // End
+
+    // + making case of char in variable choice irrelevant
     switch (tolower(choice))
     {
       case 'd':
         cout << "Amount to deposit: ";
         cin >> deposit;
-        if (!cin) {
+
+        if (!cin) {  // if cin fails to read the input
           ClearCin();
           cout << "   Input error. Returning to menu.\n";
           break;
@@ -124,19 +158,20 @@ int main() {
           break;
         }
 
-        // Bit unclear in the spec:
-        //  Should result of the calculation
-        //  - be added to balance, or
-        //  - just echoed/reported?
-        //  --
-        // I chose to report result of saving for num of years with interest
-        //  (rather than writing result back to account balance)
+        // Note: Not entirely clear in the spec if one should:
+        // - include the result back into current account balance, or
+        // - just report the result back
+        //
+        // I chose to just report the result from the calculation
+        // (as opposed to including it back into the account balance)
         interestPaymentSum = accountBalance;
         for (int i=1; i <= numOfYears; i++) {
-          /* accountBalance = (accountBalance + yearlyDeposit) * */
-                             /* (1 + (yearlyInterestRate / 100)); */
           interestPaymentSum = (interestPaymentSum + yearlyDeposit)
                                  * (1 + (yearlyInterestRate / 100));
+          // If one wanted to include the result back into account balance,
+          // the approach would instead be:
+          // accountBalance = (accountBalance + yearlyDeposit)
+          //                     * (1 + (yearlyInterestRate / 100));
         }
         cout << "----" << endl;
         cout << "Report:\n";
@@ -182,7 +217,7 @@ int main() {
 // Your choice: d
 // Amount to deposit: 100
 // Your choice: c
-//  TODO: CHECK FIRST TESTRUN BELOW
+// TODO: Check First Testrun Below
 // -- Calculate Interest-payment --
 // Sum to save (per year): 10
 // Interest rate (in whole percents): 2

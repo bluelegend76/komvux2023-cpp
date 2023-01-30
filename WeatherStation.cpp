@@ -3,13 +3,16 @@
 #include <limits>
 using namespace std;
 
-// Function to clear cin up until the next linebreak
+// Clear cin (up until the next linebreak)
 void ClearCin() {
+  // resetting cin error flag
   cin.clear();
+  // skip everything until next newline
   cin.ignore(numeric_limits<streamsize>::max(),'\n');
 }
 
-
+// Storing city and temperature in an object
+// (+ability to print compound as a string)
 class City {
   public:
     string name;
@@ -22,6 +25,7 @@ class City {
     void GetData();
 };
 
+// Get city and temperature data from user
 void City::GetData() {
   cout << "Enter city: ";
   cin >> name;
@@ -43,30 +47,33 @@ void City::GetData() {
   }
 };
  
+// Search by attribute 'temp' in an array of City objects
+// returning object index if found
 int linSearch(City obj[], int n, int key)
 {
   for (int i=0; i < n; i++) {
-    //@ cout << "Searching, inspecting city: " << obj[i].ToString() << endl;
     if (obj[i].temp == key) {
       return i;         
     }
   }
+  // matching object was not found
   return -1;
 }
 
-// Pseudo code BubbleSort ----
-// FOR i = 0 to Length of list - 1
-//   FOR j = 0 to Length of list - 1 - i
-//     IF list[j] > list[j+1] THEN
-//       Change place of elements list[j] and list[j+1]
-//     END IF
-//   END FOR
-// END FOR
+  // Pseudo code BubbleSort ----
+  // FOR i = 0 to arrlength - 1
+  //   FOR j = 0 to arrlength - 1 - i
+  //     IF array[j] > array[j+1] THEN
+  //       Change place of elements array[j] and array[j+1]
+  //     END IF
+  //   END FOR
+  // END FOR
+// Sort array of City objects
+// TODO: FLOWCHART
 void bubbleSort(City obj[], int count) {
-  //             'fält städer'
   for (int i = 0; i < count - 1; i++) {
     // inner: walking through elements
-    int nrleft = count - 1 - i;  // counter for checking already processed objects
+    int nrleft = count - 1 - i;  // counter for tracking already processed objects
     for (int j = 0; j < nrleft; j++) {
       // comparing by value in object attribute 'temp'
       if (obj[j].temp > obj[j+1].temp) {
@@ -81,12 +88,12 @@ void bubbleSort(City obj[], int count) {
 
 
 int main() {
-  // Declare an array with four cities (+including their temp-measures)
+  // Declaring an array of class City objects
   const int asize = 4;
   City cities[asize];
 
-  // Get data from user:
-  // = name and temp for cities
+  // Get data from user
+  // (name and temp for cities)
   cout << "--- Enter Cities and Temperatures ---" << endl;
   for (int i = 0; i < asize; i++) {
     cities[i].GetData();
@@ -95,20 +102,19 @@ int main() {
   // Sorting array 'cities' by temp
   cout << "--- Sorting Cities by Temperature (coldest first) ---" << endl;
   bubbleSort(cities, asize);
-  // print sorted city names (with corresponding temps)
+  // print data for sorted array of City instances
   for (int i = 0; i < asize; i++) {
     cout << cities[i].ToString() << endl;
   }
 
-  // Call function/method LinSearch
-  // to search for city with certain temp
+  // Search for city with certain temp using linSearch
   cout << "--- Searching for city with certain temperature ---" << endl;
   cout << "Enter temp-value (=int) to search for: ";
   int key;
   cin >> key;
   int resultNum;
   resultNum = linSearch(cities, asize, key);
-
+  // report result of search operation
   if (resultNum == -1) {
     cout << "Result: No city-temp matches search key." << endl;
   }

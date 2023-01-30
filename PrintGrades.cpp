@@ -1,17 +1,20 @@
 #include <iostream>
-#include <vector> // ??
+#include <limits>
 using namespace std;
 
-// Function to clear cin up until the next linebreak
+// Clear cin (up until the next linebreak)
 void ClearCin() {
+  // resetting cin error flag
   cin.clear();
+  // skip everything until next newline
   cin.ignore(numeric_limits<streamsize>::max(),'\n');
 }
 
-
-void ReadScores(const string subjectAreas[], int scores[], int arrsize) {  // = 'LasPoang'
+// 'LasPoang' - Ask user to input subject-area scores
+void ReadScores(const string subjectAreas[], int scores[], int arrsize) {
   for (int i=0; i < arrsize; i++) {
     bool inputOk = false;
+    // ask repeatedly for scores until value passes checks
     while (!inputOk) {
       cout << "Input score for subject " << subjectAreas[i] << ": ";
       cin >> scores[i];
@@ -29,14 +32,14 @@ void ReadScores(const string subjectAreas[], int scores[], int arrsize) {  // = 
   }
 }
 
-// TODO: Comment about interpretation of grades-score spans
-//       (=bit unclear in the spec)
-// A = 90-100ps ... {{{
-// B = 80-89ps
-// C = 70-79ps
-// D = 60-69ps
-// E = 50-59ps
-// F = <50ps }}}
+// The exact score ranges were not given in the spec,
+// but this is the way I interpreted the instructions
+// A: 90-100 ps
+// B: 80-89 ps
+// C: 70-79 ps
+// D: 60-69 ps
+// E: 50-59 ps
+// F: <50 ps
 void ScoresToGrades(int gradesBySubject[], const int scores[], int arrsize) {
   for (int i=0; i < arrsize; i++) {
     // If-statement [that converts test-scores to A-F grades]
@@ -45,7 +48,7 @@ void ScoresToGrades(int gradesBySubject[], const int scores[], int arrsize) {
       gradesBySubject[i] = 0;
       continue;
     }
-    if else (scores[i] >= 80 && scores[i] < 90) {
+    else if (scores[i] >= 80 && scores[i] < 90) {
       gradesBySubject[i] = 1;
       continue;
     }
@@ -68,7 +71,8 @@ void ScoresToGrades(int gradesBySubject[], const int scores[], int arrsize) {
   }
 }
 
-void PrintGrades(const string subjectAreas[], const char grades[], const int gradesBySubject[], int arrsize) {  // 'skrivUtBetyg'
+// 'skrivUtBetyg'
+void PrintGrades(const string subjectAreas[], const char grades[], const int gradesBySubject[], int arrsize) {
   cout << "=== Your Grade Scores Table ===" << endl;
   for (int i=0; i < arrsize; i++) {
     // mapping tally of grades to grade-letters
@@ -76,8 +80,25 @@ void PrintGrades(const string subjectAreas[], const char grades[], const int gra
   }
 }
 
-// TODO: [add Pseudo Code + Flow Chart]
-void GradeStats(const int gradesBySubject[], const char grades[], const int scores[], int arrsize) {  // = 'Statistik'
+  // 'Statistik' pseudo code:
+  // FOR i = 0 to length of arrsize
+  //    IF grades[grades_by_subject[i]] = 'A' THEN
+  //       increment num_of_As
+  //    ELSE IF grades[grades_by_subject[i]] = 'C' THEN
+  //       increment num_of_Cs
+  //    ELSE IF grades[grades_by_subject[i]] = 'F' THEN
+  //       increment num_of_Fs
+  //    END IF
+  // END FOR
+  // Display num_of_As
+  // Display num_of_Cs
+  // Display num_of_Fs
+  // 
+  // FOR i = 0 to length of arrsize
+  //    score_points_total = score_points_total + scores[i]
+  // END FOR
+// 'Statistik'
+void GradeStats(const int gradesBySubject[], const char grades[], const int scores[], int arrsize) {
   // Print number of A:s, C:s and F:s
   cout << "=== Printing Some Grade Stats ===" << endl;
   int numOfAs = 0, numOfCs = 0, numOfFs = 0;
@@ -110,18 +131,22 @@ void GradeStats(const int gradesBySubject[], const char grades[], const int scor
 
 int main() {
   const int arrsize = 5;
-  const string subjectAreas[arrsize] = {"Math","English","French","History","Physics"};  // 'amnen'
-  int scores[arrsize];  // = 'poang'
+  const string subjectAreas[arrsize] = {"Math","English","French","History","Physics"}; // 'amnen'
+  int scores[arrsize]; // 'poang'
   const char grades[6] = {'A','B','C','D','E','F'};
   // 0-5 =later to be referenced against grades A through F
   int gradesBySubject[arrsize] = {0}; // = 'betyg'
 
-  cout << "--- Welcome to PrintGrades ---\n";
+  cout << "--- Welcome to PrintGrades ---" << endl;
 
+  // Get subject-area scores from the user
   ReadScores(subjectAreas, scores, arrsize);
+  // Convert scores to A-F grades (stored as integers 0-5)
   ScoresToGrades(gradesBySubject, scores, arrsize);
 
+  // Match 0-5 grades to A-F scores and print grade-results
   PrintGrades(subjectAreas, grades, gradesBySubject, arrsize);
+  // Printing number of A:s, C:s and F:s, and total num of score points
   GradeStats(gradesBySubject, grades, scores, arrsize);
 
   return 0;
