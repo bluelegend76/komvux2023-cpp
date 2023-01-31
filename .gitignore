@@ -30,16 +30,20 @@
 *.exe
 *.out
 *.app
-
 PengarTillbaka
 SimpleBank
 PrintGrades
 SimpleBank
 WeatherStation
 
-\#PengarTillbaka#~
-\#SimpleBank.cpp#~
-\#PrintGrades#~
-\#SimpleBank#~
-\#WeatherStation#~
+# Emacs backup files
+\#*.cpp#~
+
+# Drawio backup files
+*.xml
+
+# image files
+*.png
+*.jpg
+*.svg
 

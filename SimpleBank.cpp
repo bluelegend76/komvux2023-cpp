@@ -53,7 +53,7 @@ int main() {
     float interestPaymentSum = 0;
 
 
-      // Switch pseudo code:
+      // Switch pseudo code: {{{
       // Case of choice
       //   d    Display "Amount to deposit"
       //        Read sum to deposit
@@ -84,9 +84,9 @@ int main() {
       //   r    Re-display menu
       //   q    Exit program
       //   Else   Display "Input error. Returning to menu."
-      // End
+      // End }}}
 
-    // + making case of char in variable choice irrelevant
+    // make case irrelevant for char in variable choice
     switch (tolower(choice))
     {
       case 'd':
